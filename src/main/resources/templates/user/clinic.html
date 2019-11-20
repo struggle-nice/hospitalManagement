@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>住院管理系统</title>
+</head>
+<link rel="stylesheet" th:href="@{/usercss/i_hospital.css}">
+<script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+<script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+<body>
+<!-- 头部导航栏 -->
+<div class="i_header">
+    <a>站点地图</a>
+    |
+    <a>院长信箱</a>
+    |
+    <a>人才招聘</a>
+    |
+    <a>人事管理</a>
+    |
+    <a>网上院史馆</a>
+    |
+    <a>在线留言</a>
+    |
+    <a>加入收藏</a>
+</div>
+<!-- 头部 -->
+<div class="i_medo">
+    <div class="i-_log">
+        <span>
+            XXXXX医院住院部
+        </span>
+    </div>
+    <div class="i_search">
+        <form th:action="@{/user/search}" method="post">
+            <input class="search" type="text" placeholder="请查找医生" name="search">
+            <input class="sure" type="submit" value="确定">
+        </form>
+    </div>
+</div>
+<!-- 主体-->
+<div class="i_body">
+    <!-- 左侧导航栏 -->
+    <div class="left_nav">
+        <!-- 快捷菜单 -->
+        <div class="fast_nav">
+            <svg class="icon fast_icon" aria-hidden="true">
+                <use xlink:href="#icon-liebiao"></use>
+            </svg>
+            <span>快捷菜单</span>
+        </div>
+        <!-- 菜单选项 -->
+        <div class="fast_navs">
+            <ul>
+                <li>
+                    <a th:href="@{/user/clinic}">就诊指南</a>
+                    <svg class="icon fast_icon" aria-hidden="true">
+                        <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+                    </svg>
+                </li>
+                <li class="navs_li">预约挂号
+                    <svg class="icon fast_icon" aria-hidden="true">
+                        <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+                    </svg>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 右侧轮播图 -->
+    <div class="right_nav" id="show">
+        <!-- 轮播图 -->
+        <img id="img_box" src="/img/guke.jpg">
+
+    </div>
+</div>
+</div>
+<!-- 介绍预约 -->
+<div class="introduce">
+    <span class="doctor">医生推荐</span><p>
+    <div class="doc" th:each="list : ${session.list}">
+        <div class="doc_img1">
+            <img th:src="@{${list.doctorImg}}"/>
+        </div> <p/>
+    <span th:text="|姓名：${list.doctorName}|"></span></br>
+    <span th:text="|所属科室：${list.doctors.department}|"></span></br>
+    <span th:text="|职位：${list.doctors.job}|"></span></br>
+    <button class="doc_btn1" th:id="${list.introduce}" onclick="btn(id)">详情</button>
+</div>
+</div>
+<!-- footer -->
+<div class="i_footer">
+
+    <span><a>主办单位 |</a></span>
+    <span><a>综合服务电话 |</a></span>
+    <span><a>急救电话 |</a></span>
+    <span><a>传真|</a></span>
+    <span><a>地址 </a></span>
+    <br>
+    <span><a>版权所有&copy; </a></span>
+    <p>
+        <span><a>关于我们 | </a></span>
+        <span><a>法律声明 | </a></span>
+        <span><a>网站地图 | </a></span>
+        <span><a>联系我们 | </a></span>
+        <span><a>院长(信访)信箱  </a></span>
+        <br>
+        <span>&copy;2019-2020.All Rights Reserved.&nbsp;备案号000001</span>
+    <p>
+</div>
+<div th:fragment="hide">
+    <div class="hide">
+        <form th:action="@{/order/save}" id="form1" method="get">
+            请选择科室:
+            <select id="select1">
+                <option VALUE="1">外科</option>
+                <option VALUE="2">骨科</option>
+                <option VALUE="3">皮肤科</option>
+                <option VALUE="4">呼吸内科</option>
+                <option VALUE="5">妇科</option>
+                <option VALUE="6">儿科</option>
+                <option VALUE="7">传染科</option>
+                <option VALUE="8">眼科</option>
+                <option VALUE="9">口腔科</option>
+            </select><br><br>
+            <span id="span1">请选择医生:</span>
+            <select id="select2" name="doctorName">
+                <option id="option1">请先选择科室</option>
+            </select>
+            <br>
+            <br>
+            预约时间:<input type="date" id="orderTime" name="orderingTime"><p/>
+            <input type="button" onclick="submit1()" value="提交" class="butn">
+        </form>
+    </div>
+</div>
+</body>
+
+<script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/hospital.js}"></script>
+<script th:src="@{/icon/iconfont.js}"></script>
+</html>

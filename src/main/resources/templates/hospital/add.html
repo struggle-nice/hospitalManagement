@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>住院管理系统</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/hospital.css}">
+    <script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="header">
+    <!-- logo -->
+    <div class="logo" >
+        <div class="logo_img">
+
+        </div>
+        <!-- 搜索栏 -->
+        <div class="search">
+            <form>
+                <div class="search_text">
+                    <button type="submit">
+                        <svg class="icon" aria-hidden="false">
+                            <use xlink:href="#icon-search"></use>
+                        </svg>
+                    </button>
+                    <input type="text" class="h_search" name="search">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- login -->
+    <div class="h_login" onmouseover="onver();"  onmouseout="onout();">
+        <div class="login"  >
+            <svg class="icon" aria-hidden="true" th:if="${session.headimage} eq null" >
+                <use xlink:href="#icon-iconfonticon-yonghu"></use>
+            </svg>
+            <img th:if="${session.headimage} != null" th:src="@{${session.headimage  }}" class="headimage"/>
+            <span th:text="${session.loginUser}"></span>
+        </div>
+        <div id="ulogin" >
+            <ul>
+                <li>更改密码</li>
+                <li>注销</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<div th:replace="~{doctor/login :: homestyle}"/>-->
+<div class="navs" id="navs">
+    <ul>
+
+        <li >
+            <a th:href="@{/doctor/login}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanfuwu"></use>
+                </svg>
+                <span id="li1">住院详情</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a  th:href="@{/patient/live}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanjiancha"></use>
+                </svg>
+                <span>入住信息</span>
+            </a>
+        </li>
+
+
+        <li >
+            <a class="active" th:href="@{/doctor/add}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-bencizhuyuanjilu"></use>
+                </svg>
+                <span>病人诊断</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a th:href="@{/doctor/management}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanhushizhan"></use>
+                </svg>
+                <span>病人管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/edit}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>医生管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/process}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>出院办理</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+<!-- 进入 -->
+<div class="icon_io">
+    <div id="svg_i" onclick="clickI();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangzuoliangci_o"></use>
+        </svg>
+    </div>
+    <div id="svg_o" onclick="clickO();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+        </svg>
+    </div>
+</div>
+<div th:class="navr">
+    <!-- 房间样式 -->
+    <table class="table">
+        <tr>
+            <th>床位id</th>
+            <th>科室</th>
+            <th>楼层号</th>
+            <th>房间号</th>
+            <th>床位号</th>
+            <th>处方</th>
+        </tr>
+        <tr th:each="bed : ${bed}">
+            <td th:text="${bed.hospitalid}"></td>
+            <td th:text="${bed.department}"></td>
+            <td th:text="${bed.floor}"></td>
+            <td th:text="${bed.room}"></td>
+            <td th:text="${bed.bed}"></td>
+            <form th:action="@{/patient/save(hospitalid=${bed.hospitalid},doctorname=${session.doctorname},pName=${name},pId=${pId})}" method="post">
+                <td><input type="text" name="chuFang" class="a_text "></td>
+                <td> <input type="submit" class="btn btn-primary a_click" value="确定"></td>
+            </form>
+        </tr>
+    </table>
+    <ul th:if="${totalPages le 7}" data-am-widget="pagination" class="pagination">
+        <li th:if="${number > 0}" class="am-pagination-prev ">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number},pId=${pId},name=${name})}" class="">上一页</a>
+        </li>
+        <li th:each="i : ${#numbers.sequence(1,totalPages)}"
+            th:classappend="${(number + 1) eq i} ? 'am-active' : ''">
+            <!--生成页码-->
+            <a th:href="@{?pageNum={pageNum}(pageNum=${i},pId=${pId},name=${name})}"
+               th:text="${i}" class="">1</a>
+        </li>
+        <li th:unless="${number + 1 == totalPages}" class="am-pagination-next ">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number} + 2,pId=${pId},name=${name})}" class="">下一页</a>
+        </li>
+    </ul>
+    <ul th:if="${totalPages gt 7}" data-am-widget="pagination"  style="text-align: center">
+        <!-- 上一页 -->
+        <li th:classappend="*{first} ? 'disabled' : ''" th:if="${number > 0}" class="am-pagination-prev ">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number - 2},pId=${pId},name=${name})}">上一页</a>
+        </li>
+        <li  th:classappend="${(number + 1) eq 1} ? 'am-active' : ''">
+            <a th:href="@{pageNum=1,pId=${pId},name=${name}}">1</a>
+        </li>
+        <!-- 当前页面小于等于4 -->
+        <li th:if="${(number + 1) le 4}" th:each="i : ${#numbers.sequence(2,5)}"
+            th:classappend="${(number + 1) eq i} ? 'am-active' : ''" >
+            <a th:href="@{?pageNum={pageNum}(pageNum=${i},pId=${pId},name=${name})}">
+                <span th:text="${i}"></span>
+            </a>
+        </li>
+        <li th:if="${(number + 1) le 4}">
+            <a href="javascript:void(0);">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <!-- 最后一页与当前页面之差，小于等于3 -->
+        <li th:if="${(totalPages-(number + 1)) le 3}">
+            <a href="javascript:void(0);" >
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <li th:if="${(totalPages-(number + 1)) le 3}" th:each="i : ${#numbers.sequence(totalPages-4,totalPages-1)}"
+            th:classappend="${(number + 1) eq i} ? 'am-active' : ''" >
+            <a th:href="@{?pageNum={pageNum}(pageNum=${i},pId=${pId},name=${name})}">
+                <span th:text="${i}"></span>
+            </a>
+        </li>
+        <!-- 最后一页与当前页面之差大于3，且  当前页面大于4-->
+        <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+            <a href="javascript:void(0);">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}"
+            th:classappend="${(number + 1) eq (number + 1)} ? 'am-active' : ''">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number+1},pId=${pId},name=${name})}" th:text="${number+1}">number</a>
+        </li>
+        <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number+2},pId=${pId},name=${name})}" th:text="${number+2}">number</a>
+        </li>
+        <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number+3},pId=${pId},name=${name})}" th:text="${number+3}">number</a>
+        </li>
+        <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+            <a href="javascript:void(0);">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <!-- 最后一页 -->
+        <li th:classappend="${(number + 1) eq totalPages} ? 'am-active' : ''" >
+            <a th:href="@{?pageNum={pageNum}(pageNum=${totalPages},pId=${pId},name=${name})}" th:text="${totalPages}">endPage</a>
+        </li>
+        <!-- 下一页 -->
+        <li th:classappend="*{last} ? 'disabled' : ''" th:unless="${number + 1 == totalPages}">
+            <a th:href="@{?pageNum={pageNum}(pageNum=${number+2},pId=${pId},name=${name})}">
+                <span aria-hidden="true">下一页</span>
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+<th:block th:include="~{doctor/login :: js}"/>
+</html>

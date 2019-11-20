@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="sie-edge" />
+    <th:block th:fragment="bootcss">
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/style.css}">
+        <script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+        <script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    </th:block>
+    <title>登录注册页面</title>
+    <!--图标库-->
+    <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
+</head>
+<body>
+
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form th:action="@{/user/land}" method="post">
+            <h1>公众登录</h1>
+            <div class="social-container">
+                <ion-icon name="add" class="btn btn-primary btn-lg"  data-toggle="modal" style = "background: #0f0f0f;border:0px;" data-target="#user"></ion-icon>
+            </a> </div>
+            <span>注册</span>
+            <input type="text" placeholder="用户名" name="id">
+            <input type="password" placeholder="密码" name="password">
+            <button>登录</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form th:action="@{/doctor/land}" method="post">
+            <h1>医生登录</h1>
+            <div class="social-container">
+                <ion-icon name="add" class="btn btn-primary btn-lg" style = "background: #0f0f0f;border:0px;" data-toggle="modal" data-target="#doctor"></ion-icon>
+            </div>
+            <span>注册</span>
+            <input type="text" name="username" placeholder="用户名">
+            <input type="password" name="password" placeholder="密码">
+            <button>登录</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>医生登录</h1>
+                <p>您如果是医生的话，请使用医生登录</p>
+                <button class="ghost" id="signIn">登录</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>公众登录</h1>
+                <p>普通游客请使用此登录方式</p>
+                <button class="ghost" id="signUp">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--模态框-->
+<div class="modal fade" id="doctor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="doctorLabel">
+                    请输入注册信息
+                </h4>
+            </div>
+            <div class="modal-body">
+        <form th:action="@{/doctor/save}" method="post" class="form-style" >
+            <div class="form-group">
+                <label for="username1">账户名</label><input type="text" class="form-control" required id="username1" name="username" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="form-group">
+                <label for="nickname1">姓名</label><input type="text" class="form-control" required id="nickname1" name="nickname" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="form-group">
+                <label for="password1">密码</label><input required type="password" class="form-control" id="password1"
+                                                             name="password" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="form-group">
+                <label for="age">年龄</label><input type="text" class="form-control" id="age" name="age" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="radio">
+                <label><input type="radio"  name="gender" value="男">男&nbsp;&nbsp;</label>
+                <label><input type="radio"  name="gender" value="女">女</label>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">电话号码</label><input type="text" class="form-control" id="phoneNumber" name="phoneNumber" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="form-group">
+                <label for="department">部门</label><input required type="text" class="form-control" id="department"
+                                                                 style="border: darkgray 1px solid;color:black" name="department"/>
+            </div>
+            <div class="form-group">
+                <label for="job">职位</label><input required type="text" class="form-control" id="job" name="job" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label><input type="text" class="form-control" id="email" name="email" style="border: darkgray 1px solid;color:black"/>
+            </div>
+            <button type="submit" id="submitSave" class="btn btn-primary">
+                提交
+            </button>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+    </div>
+</div>
+<!--第二个模态框-->
+<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="userLabel">
+                    请输入注册信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                    <form th:action="@{/user/save}" method="post">
+                        <div class="form-group">
+                            <label for="id">账号</label><input type="text" required class="form-control" id="id" name="id" style="border: darkgray 1px solid;color:black"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label><input required type="password" class="form-control" id="password"
+                                                                         name="password" style="border: darkgray 1px solid;color:black"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname">昵称</label><input required type="text" class="form-control" id="nickname" name="nickname" style="border: darkgray 1px solid;color:black"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">phone</label><input required type="text" class="form-control" id="phone" name="phone" style="border: darkgray 1px solid;color:black"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email1">email</label><input required type="text" class="form-control" id="email1" name="email" style="border: darkgray 1px solid;color:black"/>
+                        </div>
+                    <button type="submit" class="btn btn-primary" >
+                        提交
+                    </button>
+                    </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</div>
+</body>
+
+<script th:src="@{/bootstrap-3.3.7-dist/js/login.js}"></script>
+<th:block th:fragment="heart">
+</th:block>
+
+</html>

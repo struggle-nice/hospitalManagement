@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="~{patient/management :: hospitalcss}"/>
+</head>
+<body>
+<div class="header">
+    <!-- logo -->
+    <div class="logo" >
+        <div class="logo_img">
+
+        </div>
+    </div>
+    <!-- login -->
+    <div class="h_login" onmouseover="onver();"  onmouseout="onout();">
+        <div class="login"  >
+
+            <svg class="icon" aria-hidden="true" th:if="${session.headimage} eq null" >
+                <use xlink:href="#icon-iconfonticon-yonghu"></use>
+            </svg>
+            <img th:if="${session.headimage} != null" th:src="@{${session.headimage  }}" class="headimage"/>
+            <span th:text="${session.loginUser}"></span>
+        </div>
+        <!-- 用户的影藏界面 -->
+        <div id="ulogin" >
+            <ul>
+                <li><a data-toggle="modal" data-target="#xiugai" href="#">更改密码</a></li>
+                <li><a th:href="@{/doctor/exit}">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="navs" id="navs">
+    <ul>
+
+        <li >
+            <a  th:href="@{/doctor/login}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanfuwu"></use>
+                </svg>
+                <span id="li1">住院详情</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a  th:href="@{/patient/live}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanjiancha"></use>
+                </svg>
+                <span>入住信息</span>
+            </a>
+        </li>
+
+
+        <li >
+            <a th:href="@{/doctor/add}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-bencizhuyuanjilu"></use>
+                </svg>
+                <span>病人诊断</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a th:href="@{/doctor/management}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanhushizhan"></use>
+                </svg>
+                <span>病人管理</span>
+            </a>
+        </li>
+        <li>
+            <a class="active" th:href="@{/doctor/edit}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>医生管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/process}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>出院办理</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+<!-- 进入 -->
+<div class="icon_io">
+    <div id="svg_i" onclick="clickI();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangzuoliangci_o"></use>
+        </svg>
+    </div>
+    <div id="svg_o" onclick="clickO();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+        </svg>
+    </div>
+</div>
+<div class="navr">
+    <form th:action="@{/doctor/update}" method="post" enctype="multipart/form-data">
+        <img   th:src="@{${introduce.doctorImg}}" id="headImg"/>
+        <div class="form-group">
+            <label for="file" class="btn btn-default">更换头像</label>
+            <input id="file" type="file" name="doctorImg" style="display:none">
+            <input hidden="" type="text" name="imgpath" value="D:\idea_lanuch\bysj\src\main\resources\static\headImg">
+        </div>
+        <div>
+                <div style="width:400px">
+                    <div class="form-group">
+                        <label>账号:<span th:text="${list.username}"></span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">昵称</label><input type="text" class="form-control" id="nickname" name="nickname" th:value="${list.nickname}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">年龄</label><input type="text" class="form-control" id="age" name="age" th:value="${list.age}"/>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" th:attr="checked=${list.gender eq '男' ?true:false}" name="gender" value="男">男&nbsp;&nbsp;</label>
+                        <label><input type="radio" th:attr="checked=${list.gender eq '女' ?true:false}" name="gender" value="女">女</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">手机号</label><input type="text" class="form-control" id="phone_number" readonly th:placeholder="${list.phoneNumber}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>部门:<span th:text="${list.department}"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label>职位:<span th:text="${list.job}"/></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱地址</label><input type="email" class="form-control" id="email" name="email" th:value="${list.email}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="introduce">简介</label><textarea name="introduce" class="form-control" id="introduce" th:attr="placeholder=${introduce.introduce eq null  ? '介绍一下你自己': null}"
+                                                                   th:text="${introduce.introduce}"></textarea>
+                    </div>
+                    <span th:text="${error}"></span>
+                    <button type="submit" class="btn btn-primary" style="float: right">
+                        提交更改
+                    </button>
+                </div>
+        </div>
+    </form>
+</div>
+<div th:replace="~{patient/management :: modify}"></div>
+</body>
+<script type="text/javascript" th:src="@{/javascript/hospital.js}"></script>
+<script th:src="@{/icon/iconfont.js}"></script>
+</html>

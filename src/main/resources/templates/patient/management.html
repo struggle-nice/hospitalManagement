@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:fragment="hospitalcss">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/hospital.css}">
+    <script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    </th:block>
+</head>
+<body>
+<div th:fragment="search1">
+    <div class="header">
+        <!-- logo -->
+        <div class="logo" >
+            <div class="logo_img">
+            </div>
+            <!-- 搜索栏 -->
+            <div class="search">
+                <form th:action = "@{/doctor/search}" method="post">
+                    <div class="search_text">
+                        <button type="submit">
+                            <svg class="icon" aria-hidden="false">
+                                <use xlink:href="#icon-search"></use>
+                            </svg>
+                        </button>
+                        <input type="text" class="h_search" name="name">
+                    </div>
+                </form>
+            </div>
+        </div>
+    <!-- login -->
+        <div class="h_login" onmouseover="onver();"  onmouseout="onout();">
+            <div class="login"  >
+                <svg class="icon" aria-hidden="true" th:if="${session.headimage} eq null" >
+                    <use xlink:href="#icon-iconfonticon-yonghu"></use>
+                </svg>
+                <img th:if="${session.headimage} != null" th:src="@{${session.headimage  }}" class="headimage"/>
+                <span th:text="${session.loginUser}"></span>
+            </div>
+        <!-- 用户的隐藏界面 -->
+            <div id="ulogin" >
+                <ul>
+                    <li><a data-toggle="modal" data-target="#xiugai" href="#">更改密码</a></li>
+                    <li><a th:href="@{/doctor/exit}">注销</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navs" id="navs">
+    <ul>
+
+        <li >
+            <a th:href="@{/doctor/login}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanfuwu"></use>
+                </svg>
+                <span id="li1">住院详情</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a  th:href="@{/patient/live}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanjiancha"></use>
+                </svg>
+                <span>入住信息</span>
+            </a>
+        </li>
+
+
+        <li >
+            <a th:href="@{/doctor/add}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-bencizhuyuanjilu"></use>
+                </svg>
+                <span>病人诊断</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a class="active" th:href="@{/doctor/management}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanhushizhan"></use>
+                </svg>
+                <span>病人管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/edit}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>医生管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/process}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>出院办理</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+<!-- 进入 -->
+<div class="icon_io">
+    <div id="svg_i" onclick="clickI();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangzuoliangci_o"></use>
+        </svg>
+    </div>
+    <div id="svg_o" onclick="clickO();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+        </svg>
+    </div>
+</div>
+<div class="navr">
+    <table class="table" style="font-size:20px">
+        <tr>
+            <th>患者id</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>诊断时间</th>
+            <th>病症</th>
+            <th>查找病房</th>
+        </tr>
+        <tr th:each="patient:${result}">
+            <td th:text="${patient.pId}"></td>
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.gender}"></td>
+            <td th:text="${patient.age}"></td>
+            <td th:text="${patient.hospitalTime}"></td>
+            <td th:text="${patient.disease}"></td>
+            <td><a th:href="@{/patient/hospital(pId=${patient.pId},name=${patient.name})}"><span class="glyphicon glyphicon-search"></span></a></td>
+        </tr>
+    </table>
+<ul th:if="${totalPages le 7}" data-am-widget="pagination" class="pagination" >
+    <li th:if="${number > 0}" class="am-pagination-prev ">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number})}" class="">上一页</a>
+    </li>
+    <li th:each="i : ${#numbers.sequence(1,totalPages)}"
+        th:classappend="${(number + 1) eq i} ? 'am-active' : ''">
+        <!--生成页码-->
+        <a th:href="@{?pageNum={pageNum}(pageNum=${i})}"
+           th:text="${i}" class="">1</a>
+    </li>
+    <li th:unless="${number + 1 == totalPages}" class="am-pagination-next ">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number} + 2)}" class="">下一页</a>
+    </li>
+</ul>
+<ul th:if="${totalPages gt 7}" data-am-widget="pagination"  style="text-align: center">
+    <!-- 上一页 -->
+    <li th:classappend="*{first} ? 'disabled' : ''" th:if="${number > 0}" class="am-pagination-prev ">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number - 2})}">上一页</a>
+    </li>
+    <li  th:classappend="${(number + 1) eq 1} ? 'am-active' : ''">
+        <a th:href="@{pageNum=1}">1</a>
+    </li>
+    <!-- 当前页面小于等于4 -->
+    <li th:if="${(number + 1) le 4}" th:each="i : ${#numbers.sequence(2,5)}"
+        th:classappend="${(number + 1) eq i} ? 'am-active' : ''" >
+        <a th:href="@{?pageNum={pageNum}(pageNum=${i})}">
+            <span th:text="${i}"></span>
+        </a>
+    </li>
+    <li th:if="${(number + 1) le 4}">
+        <a href="javascript:void(0);">
+            <span aria-hidden="true">...</span>
+        </a>
+    </li>
+    <!-- 最后一页与当前页面之差，小于等于3 -->
+    <li th:if="${(totalPages-(number + 1)) le 3}">
+        <a href="javascript:void(0);" >
+            <span aria-hidden="true">...</span>
+        </a>
+    </li>
+    <li th:if="${(totalPages-(number + 1)) le 3}" th:each="i : ${#numbers.sequence(totalPages-4,totalPages-1)}"
+        th:classappend="${(number + 1) eq i} ? 'am-active' : ''" >
+        <a th:href="@{?pageNum={pageNum}(pageNum=${i})}">
+            <span th:text="${i}"></span>
+        </a>
+    </li>
+    <!-- 最后一页与当前页面之差大于3，且  当前页面大于4-->
+    <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+        <a href="javascript:void(0);">
+            <span aria-hidden="true">...</span>
+        </a>
+    </li>
+    <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}"
+        th:classappend="${(number + 1) eq (number + 1)} ? 'am-active' : ''">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number+1})}" th:text="${number+1}">number</a>
+    </li>
+    <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number+2})}" th:text="${number+2}">number</a>
+    </li>
+    <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number+3})}" th:text="${number+3}">number</a>
+    </li>
+    <li th:if="${((number + 1) gt 4) && ((totalPages-(number + 1)) gt 3 )}">
+        <a href="javascript:void(0);">
+            <span aria-hidden="true">...</span>
+        </a>
+    </li>
+    <!-- 最后一页 -->
+    <li th:classappend="${(number + 1) eq totalPages} ? 'am-active' : ''" >
+        <a th:href="@{?pageNum={pageNum}(pageNum=${totalPages})}" th:text="${totalPages}">endPage</a>
+    </li>
+    <!-- 下一页 -->
+    <li th:classappend="*{last} ? 'disabled' : ''" th:unless="${number + 1 == totalPages}">
+        <a th:href="@{?pageNum={pageNum}(pageNum=${number+2})}">
+            <span aria-hidden="true">下一页</span>
+        </a>
+    </li>
+</ul>
+</div>
+<div th:fragment="modify">
+<div class="modal fade" id="xiugai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+            </div>
+            <form method="get" action="#" id="xiugai1">
+            <div class="modal-body">
+                <label for="password">请输入旧密码：</label><input type="password" id="password" name="password" required class="form-control">
+                <label for="password1">请输入新密码：</label><input type="password" name="newPassword1" id="password1" required class="form-control">
+                <label for="password2">确认密码：</label><input type="password"  id="password2" name="newPassword2" required class="form-control">
+                <button type="reset"  id="reset" hidden></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                <button type="button" class="btn btn-primary" onclick="xiugai()">提交更改</button>
+            </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/javascript/hospital.js}"></script>
+<script th:src="@{/icon/iconfont.js}"></script>
+</html>

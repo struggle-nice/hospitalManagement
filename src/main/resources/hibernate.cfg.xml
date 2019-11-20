@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/bysj?serverTimezone=GMT%2B8</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <mapping class="cn.com.scitc.bysj.model.Doctor"/>
+        <mapping class="cn.com.scitc.bysj.model.Picture"/>
+        <mapping class="cn.com.scitc.bysj.model.Doctor"/>
+        <mapping class="cn.com.scitc.bysj.model.Doctor"/>
+        <mapping class="cn.com.scitc.bysj.model.Cii"/>
+        <mapping class="cn.com.scitc.bysj.model.Hospital"/>
+        <mapping class="cn.com.scitc.bysj.model.Patient"/>
+        <mapping class="cn.com.scitc.bysj.model.User"/>
+        <mapping class="cn.com.scitc.bysj.model.Ordering"/>
+        <mapping class="cn.com.scitc.bysj.model.Introduce"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

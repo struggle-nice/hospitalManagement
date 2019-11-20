@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>住院管理系统</title>
+    <th:block th:include="~{patient/management :: hospitalcss}"/>
+</head>
+<body>
+<!-- 头部导航栏 -->
+
+<div class="header">
+    <!-- logo -->
+    <div class="logo" >
+        <div class="logo_img">
+
+        </div>
+    </div>
+
+    <!-- login -->
+    <div class="h_login" onmouseover="onver();"  onmouseout="onout();">
+        <div class="login"  >
+
+            <svg class="icon" aria-hidden="true" th:if="${session.headimage} eq null" >
+                <use xlink:href="#icon-iconfonticon-yonghu"></use>
+            </svg>
+            <img th:if="${session.headimage} != null" th:src="@{${session.headimage  }}" class="headimage"/>
+            <span th:text="${session.loginUser}"></span>
+        </div>
+        <!-- 用户的隐藏界面 -->
+        <div id="ulogin" >
+            <ul>
+                <li><a data-toggle="modal" data-target="#xiugai" href="#">更改密码</a></li>
+                <li><a th:href="@{/doctor/exit}">注销</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 侧边导航栏 -->
+    <div class="navs" id="navs">
+        <ul>
+
+            <li >
+                <a th:href="@{/doctor/login}" >
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuyuanfuwu"></use>
+                    </svg>
+                    <span id="li1">住院详情</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a  th:href="@{/patient/live}">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuyuanjiancha"></use>
+                    </svg>
+                    <span>入住信息</span>
+                </a>
+            </li>
+
+
+            <li >
+                <a th:href="@{/doctor/add}">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-bencizhuyuanjilu"></use>
+                    </svg>
+                    <span>病人诊断</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a th:href="@{/doctor/management}">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuyuanhushizhan"></use>
+                    </svg>
+                    <span>病人管理</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/doctor/edit}">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                    </svg>
+                    <span>医生管理</span>
+                </a>
+            </li>
+            <li>
+                <a class="active" th:href="@{/doctor/process}">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                    </svg>
+                    <span>出院办理</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <!-- 进入 -->
+    <div class="icon_io">
+        <div id="svg_i" onclick="clickI();">
+            <svg class="icon"  aria-hidden="true" >
+                <use xlink:href="#icon-jiantou_xiangzuoliangci_o"></use>
+            </svg>
+        </div>
+        <div id="svg_o" onclick="clickO();">
+            <svg class="icon"  aria-hidden="true" >
+                <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+            </svg>
+        </div>
+    </div>
+
+<!-- 侧边导航栏 -->
+<div class="navr">
+    <span>目前该科室还没有患者入院！</span>
+</div>
+<div th:replace="~{patient/management :: modify}"></div>
+</body>
+<th:block th:fragment="js">
+    <script th:src="@{/bootstrap-3.3.7-dist/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/javascript/hospital.js}"></script>
+    <script th:src="@{/icon/iconfont.js}"></script>
+</th:block>
+</html>

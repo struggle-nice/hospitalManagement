@@ -1,0 +1,19 @@
+.plus{
+    width: 100px;
+    height: 30px;
+    border:#9d9d9d 1px solid;
+    text-align:center;
+
+    margin:auto;
+    border-radius:0 0 50px 50px;
+}
+.plus:hover{
+    background:#f9f9f9;
+    box-shadow:0 0 25px 2px rgba(0,0,0,.2);
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}

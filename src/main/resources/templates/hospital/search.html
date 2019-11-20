@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:include="~{patient/management :: hospitalcss}"/>
+</head>
+<body>
+<div  th:replace="~{hospital/live :: search2}"/>
+<div class="navs" id="navs">
+    <ul>
+
+        <li >
+            <a  th:href="@{/doctor/login}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanfuwu"></use>
+                </svg>
+                <span id="li1">住院详情</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a class="active" th:href="@{/patient/live}" >
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanjiancha"></use>
+                </svg>
+                <span>入住信息</span>
+            </a>
+        </li>
+
+
+        <li >
+            <a th:href="@{/doctor/add}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-bencizhuyuanjilu"></use>
+                </svg>
+                <span>病人诊断</span>
+            </a>
+        </li>
+
+
+        <li>
+            <a th:href="@{/doctor/management}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanhushizhan"></use>
+                </svg>
+                <span>病人管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/edit}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>医生管理</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/doctor/process}">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuyuanyishengzhan"></use>
+                </svg>
+                <span>出院办理</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+<!-- 进入 -->
+<div class="icon_io">
+    <div id="svg_i" onclick="clickI();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangzuoliangci_o"></use>
+        </svg>
+    </div>
+    <div id="svg_o" onclick="clickO();">
+        <svg class="icon"  aria-hidden="true" >
+            <use xlink:href="#icon-jiantou_xiangyouliangci_o"></use>
+        </svg>
+    </div>
+</div>
+<div class="navr">
+    <table class="table">
+        <tr>
+            <th>楼层</th>
+            <th>房间号</th>
+            <th>床位号</th>
+            <th>病人姓名</th>
+            <th>处方</th>
+            <th>医生姓名</th>
+        </tr>
+        <tr th:each="live : ${hospitalList}">
+            <td th:text="${live.floor}"></td>
+            <td th:text="${live.room}"></td>
+            <td th:text="${live.bed}"></td>
+            <td th:text="${live.pName}"></td>
+            <td th:text="${live.chuFang}"></td>
+            <td th:text="${live.doctorName}"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+<th:block th:include="~{doctor/login :: js}"/>
+</html>

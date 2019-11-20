@@ -1,0 +1,338 @@
+body{
+    margin:0px;
+    padding:0px;
+    background-color: whitesmoke;
+    width:100%;
+    min-width:1000px;
+    max-width:100%;
+    height:100%;
+    font-size: 20px;
+}
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+.header{
+    width: 90vm;
+    height: 80px;
+    background:linear-gradient(to right,white 15%,#1b6d85 80% );
+}
+.header .logo{
+    float: left;
+    position: absolute;
+    width: 800px;
+    height: 80px;
+    /* border:1px solid red; */
+}
+/* logo */
+.logo_img{
+    width: 100px;
+    height: 80px;
+    float: left;
+    background-image: url("/img/loginlogo.jpg");
+    background-size:100%;
+    margin-left: 40px;
+}
+
+.search{
+    /* border: 1px solid green; */
+    width: 320px;
+    height: 80px;
+    float: right;
+    position: relative;
+    
+}
+.search button{
+    box-shadow: none;
+    border: 0px;
+    outline: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    margin-top:20px;
+    height: 38px;
+    float: left;
+}
+.search .h_search{ 
+    box-shadow: none;
+    outline: none;
+    border: 0px;
+    border-bottom: 2px solid #99CCFF;
+    width: 265px;
+    height: 40px;
+    margin-top:20px;
+    float: right;
+    background: transparent;
+    transition:border-bottom 2s;
+
+}
+.search .h_search:hover{
+
+    border-bottom:2px solid pink ;
+}
+.search svg{
+    width: 50px;
+    height: 40px;
+}
+
+.header .h_login{
+    position: relative;
+    float: right;
+    right: 0px;
+    width: 150px;   
+    height: 80px;
+    /* border: 1px solid red; */
+}
+/* 登录图标 */
+.login a{
+    float: left;
+    margin-top:30px;
+    text-decoration:none;
+    color:black;
+
+}
+.login a:hover{
+    color:#99CCFF;
+}
+.header .h_login svg{
+    /* border-radius: 50%; */
+    float: right;
+    /* border: 1px black solid; */
+    padding: 4px 4px;
+    width:40px;
+    height: 40px;
+    margin-top: 15px;
+    margin-right: 30px;
+
+}
+/* 隐藏框 */
+#ulogin{
+    display:none;
+    width: 140px;
+    height: 120px;
+    right: 0px;
+    top:80px;
+    border-radius:10px;
+    background: linear-gradient(to bottom,white,gray);
+    /* border: 1px solid green; */
+    position: absolute;
+}
+#ulogin ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+#ulogin a{
+    color: white;
+    text-decoration:none;
+}
+#ulogin a:hover{
+    color:#1b6d85;
+}
+#ulogin ul li{
+    /* border:1px solid red; */
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    border-radius: 10px;
+    background:linear-gradient(to left,white,gray);
+}
+.navs{
+        /*margin-left: 20px;*/
+    overflow: hidden;
+     /*border: 1px solid red;*/
+    background:linear-gradient(to bottom,white 3%,#1b6d85 80%);
+    float:left;
+    width: 16%;
+    min-height:100vh;
+
+}
+.navs ul{
+    padding:0;
+    margin:0;
+    list-style:none
+    
+}
+.navs li{
+     /*border: 1px solid green;*/
+    text-align:center;
+    padding-top:15px;
+    width: 100%;
+    min-width: 180px;
+    height: 45px;
+    margin:30px 0px;
+    box-shadow: 5px grey;
+    font-size:18px;
+    transition: font-size 10ms;
+}
+.active{
+    background-color:grey;
+}
+.navs li span{
+    font-family: "Times New Roman",Times,serif;
+    margin: 20px;
+    width:20px;
+    padding: 5px;
+    color: black;
+    font-weight: bold;
+}
+.navs li a{
+    /*border:1px solid orange;*/
+    position: relative;
+    height: 100%;
+    width: 200px;
+    text-decoration:none;
+    color:black;
+    transition:color 2s ;
+    padding: 10px 10px;
+    
+}
+.navs a:hover {
+    
+}
+
+/*.navs li:hover{*/
+/*    font-size:1.4em;*/
+/*}*/
+.icon_io{
+    /* border: 1px solid red; */
+    margin: 15px 0px;
+    float:center;
+    position: absolute;
+    
+}
+@keyframes iconSvg
+{
+	25%   {background:pink; left:0px; top:0px;}
+	0%  {background:#99CCFF; left:20px; top:0px;}
+}
+.icon_io #svg_i{
+    display:block;
+    animation:iconSvg 5s;
+    animation-play-state:running;
+}
+.icon_io #svg_o{
+    display: none;
+    animation:iconSvg 5s;
+    animation-play-state:running;
+}
+.navr{
+    background:linear-gradient(to bottom,white,#99CCFF);
+    border-radius: 20px;
+    /* animation:h_nav 5s; */
+    /* animation-fill-mode: forwards; */
+    /* border:1px solid red; */
+    float: right;
+    width:80%;
+    min-height: 100vh;
+    /* margin-right:1%; */
+}
+.room{
+    border: 1px solid grey;
+    border-radius:50%;
+    box-shadow: 5px 5px 5px #888888;
+    padding:10px 10px;
+    margin: 20px 20px;
+    width:160px;
+    height: 160px;
+    filter: blur(0.5px);
+}
+.room:hover{
+    filter: blur(0px);
+}
+.room_img{
+    margin: 20px;
+    text-align: center;
+    /* border:1px solid green; */
+}
+.room_img svg{
+    width:40px;
+    height: 40px;
+}
+.room_text{
+    /* border:1px solid green; */
+    font-size:15px;
+    text-align: center;
+    margin-left: 0px;
+}
+.form-type{
+    width:60px;
+    height:15px;
+    border:#0f0f0f 1px solid;
+    border-radius: 10px;
+}
+
+@keyframes h_nav{
+    from {width:80%;}
+    to {width: 94%;}
+}
+@keyframes h_nav1{
+    from {width:94%;}
+    to {width:80%;}
+}
+@keyframes h_nav2{
+    from{width:17%;}
+    to{width:3.5%;}
+}
+@keyframes h_nav3{
+    from{width:3.5%;}
+    to{width:17%;}
+}
+#headImg{
+    width:80px;
+}
+.hospital{
+    width: 30px;
+    height: 30px;
+    color: darkgrey;
+}
+/*.a_click{*/
+/*    display: none;*/
+/*}*/
+.headimage{
+    width:58px;
+    height: 58px;
+    border-radius: 50%;
+}
+#modelst{
+    /*border:1px solid red;*/
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    top:100px;
+    left:40%;
+    background: white;
+    border-radius: 10px;
+    display: none;
+}
+#modelst .yizhu{
+    width: 100%;
+    position: relative;
+    top:10px;
+    left:20px;
+    /*border-bottom: 1px solid grey;*/
+}
+.text1{
+    width:90%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 80px;
+    position: relative;
+        /*border:1px solid red;*/
+    top:-10px;
+}
+.yizhubtn{
+    position: relative;
+    top:0px;
+    background: linear-gradient(to right,gray);
+    width: 80px;
+    height: 40px;
+    font-size:17px;
+}
+.div1{
+    text-align: center;
+}
+

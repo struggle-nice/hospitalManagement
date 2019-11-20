@@ -1,0 +1,342 @@
+html,body{
+    margin:0px;
+    padding:0px;
+    width:100%;
+    height:100%;
+    min-width:1000px;
+    max-width:100%;
+
+}
+body{
+    /* background-image: url("../img/3.jpg"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center center;
+    opacity:0.85;
+    /*background-image: url("/img/background4.png");*/
+}
+.i_header{
+    /* border:1px solid red; */
+    width:100%;
+    margin-right: auto;
+    margin-left: auto;
+    height:30px;
+    text-indent: 7%; 
+    background-color:gainsboro;
+    color:grey;
+}
+div hover{
+
+}
+.i_header a{
+    /* border:1px solid red; */
+    text-align: center;
+    margin-top:10px;
+    padding:10px;
+    font-size:13px; 
+}
+.i_header .language{
+    /* border:1px solid red; */
+    margin-top: 2px;
+    float:right;
+    width: 220px;
+    font-size:13px; 
+}
+.i_medo{
+    /* border:1px solid red; */
+    width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+    height:120px;
+    background-image: url("/img/background.jpg");
+}
+/* logo */
+.i_medo .i_logo{
+    /* border:1px solid green; */
+    float: left;
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    font-size:35px;
+
+}
+.i_medo .i_logo span{
+    /* border:1px solid red; */
+    top:25px;
+    position: relative;
+}
+.i_medo .i_search{
+     /*border:1px solid green;*/
+    float: right;
+    width: 50%;
+    position: relative;
+    height: 100%;
+}
+
+.i_search .option{
+    margin-top:4%;
+    appearance:none;
+    box-shadow: none;
+    width:20%;
+    height: 50px;
+    border: 1px solid grey;   
+    border-radius: 0px; 
+    position: relative;
+    background:transparent;
+}
+/* 去掉下拉 */
+.i_search .option::-ms-expand{
+    display: none;
+}
+.i_search .search{
+    box-shadow: none;
+    width:60%;
+    height: 45px;
+    border: 1px solid grey;    
+    background:transparent;
+    position: relative;
+    top:20px;
+}
+.i_search .sure{
+    box-shadow: none;
+    width:12%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid grey;   
+    position: relative;
+    top:20px;
+    /*background:#ADD8E6;*/
+}
+.i_search .sure:hover{
+    animation:click_sure 5s;
+    animation-play-state:running;
+}
+.i_body{
+    width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:1%;
+    height:45%;
+    background:transparent;
+    /* border:1px solid grey; */
+    /* border-radius:20px; */
+}
+/* 左侧 */
+.left_nav{
+    border:1px solid grey;
+    height: 100%;
+    width:25%;
+    float: left;
+    background: #9acfea;
+}
+.left_nav a{
+    color: black;
+    text-decoration: none;
+}
+.left_nav a:hover{
+    color:#c0a16b;
+}
+/* 快捷菜单 */
+.fast_nav{
+    /* border:1px solid red; */
+    background:linear-gradient(to right,#ADD8E6,pink);
+    color:black;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+}
+.fast_icon{
+    width:15px;
+    height: 15px;
+}
+/* 快捷选项 */
+.fast_navs{
+    margin:10px;
+    /* border:1px solid grey; */
+}
+.fast_navs ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+.fast_navs li{
+    padding:18px 0px;
+    /* margin: 0px 15px; */
+    text-align: center;
+    border-bottom:1px solid grey;
+}
+.fast_navs li:hover{
+    animation:li_navs 1s;
+    animation-play-state:running;
+    animation-fill-mode: forwards;
+}
+/* 隐藏栏 */
+.hide{
+
+    border: 1px solid grey;
+    width: 500px;
+    height: 283px;
+    display: none;
+    position: absolute;
+    left:400px;
+    top:200px;
+    box-shadow: 10px 10px 5px grey;
+    background: #bce8f1;
+    }
+/* 右侧 */
+.right_nav{
+    border:1px solid grey;
+    float: right;
+    height: 100%;
+    width:72%;
+    /*background: url("/img/host.jpg");*/
+    background-size: 100%;
+}
+
+.carousel{
+    /* border:1px solid red; */
+    height:100%;
+}
+/* 介绍预约 */
+.introduce{
+    width: 85%;
+    margin:1%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 60%;
+    border:1px solid grey;
+    /*background: #b9def0;*/
+    background-image: url("/img/background.jpg");
+}
+.introduce .doctor{
+    margin-left:47%;
+    margin-top:23px;
+    text-align: bottom;
+    position: relative;
+    font-size:20px;
+    top:10px;
+    /* color:pink; */
+    /* 先将字体镂空再填充背景的颜色 */
+    /* background:linear-gradient(to right,#ADD8E6,pink); */
+    background-image: -webkit-linear-gradient(bottom,pink,#ADD8E6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* border:1px solid red; */
+
+}
+.introduce .doc{
+    width:19.99%;
+    height:84%;
+    margin:10px 0px 0px 0px;
+    /* border: 1px solid grey; */
+    float:left;
+    text-align: center;
+}
+.introduce .doc:hover{
+   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.doc_img1,.doc_img2,.doc_img3,.doc_img4,.doc_img5{
+    width:62%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:15%;
+    height:50%;
+    border:1px solid grey;
+    background-size: 100%;
+}
+.doc span{
+    line-height: inherit;
+    /* position: relative; */
+    font-size:15px;
+    color:grey;
+}
+.doc .doc_btn1{
+    width:25%;
+    box-shadow: none;
+    font-size:15px;
+    font-weight: 100;
+    color:white;
+    border: 0px;
+    outline: none;
+    background:grey;
+    margin-top:5%;
+    margin:10px;
+    padding:5px;
+}
+.doc_btn1:hover{
+    background:#ADD8E6;
+}
+.doc .doc_btn2{
+    width:25%;
+    box-shadow: none;
+    font-size:15px;
+    font-weight: 100;
+    border: 0px;
+    outline: none;
+    background:green;
+    margin:10px;
+    padding:5px;
+}
+.doc_btn2:hover{
+    background:pink;
+}
+.i_footer{
+    width: 100%;
+    /* margin-bottom:0px; */
+    height:20%;
+    background-color: gainsboro;
+    /* border-radius: 20px; */
+    border-top:1px grey solid;
+    text-align: center;
+    padding-top:3%;
+}
+.i_footer span{
+    color:grey;
+    font-weight:200;
+}
+.i_footer select{
+    width: 100px;
+    background:gainsboro;
+    appearance:none;
+    box-shadow: none;
+}
+@keyframes click_sure
+{
+	25%   {background:pink; left:0px; top:20px;}
+	0%  {background:#99CCFF; left:0px; top:20px;}
+}
+@keyframes li_navs{
+    from{background:#99CCFF;width:190px;}
+    to{background:pink;width:287px;}
+}
+
+.doc_img1 img{
+    width:160px;
+    height: 180px;
+}
+
+select{
+    width:120px;
+    height: 20px;
+}
+.butn{
+    width: 60px;
+    height: 30px;
+    border-color: ghostwhite;
+    background: ghostwhite;
+}
+/*----------用来移除上下箭头----------*/
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+/*----------用来移除叉叉按钮----------*/
+input[type="date"]::-webkit-clear-button{
+    display:none;
+}
+.right_nav > img{
+    width: 100%;
+    height: 100%;
+}
+
